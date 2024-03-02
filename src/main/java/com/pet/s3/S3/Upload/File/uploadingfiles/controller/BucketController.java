@@ -14,6 +14,9 @@ public class BucketController {
     @Autowired
     private  AmazonClient amazonClient;
 
+
+
+
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestPart(value = "file") MultipartFile file) {
         return this.amazonClient.uploadFile(file);
