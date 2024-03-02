@@ -1,5 +1,5 @@
 amazonProperties:
-  accessKey: ecdb15ec5905b778cc3f0f0e64d0acfb
-  secretKey: 2b63addfe05e4f65b5e0b4021e8e572d99b2a26872ad6311dccb697c277adf75
-  endpointUrl : https://ec0b88e59da9d8ab7d05c20afef02f04.r2.cloudflarestorage.com
-  bucketName : cho-mua-sam
+  accessKey: ecdb15ec5905b778cc3f0f0e64d0acfbdasd
+  secretKey: 2b63addfe05e4f65b5e0b4021e8ádasde572d99b2a26872ad6311dccb697c277adf75
+  endpointUrl : https://ec0b88e59da9d8aádasdasdb7d05c20afef02f04.r2.cloudflarestorage.com
+  bucketName : cho-mua-samdasdasd
