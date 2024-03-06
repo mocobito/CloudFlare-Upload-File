@@ -13,7 +13,7 @@ public class BucketController {
 
 
     @PostMapping("/uploadFile")
-    public String uploadFile(@RequestPart(value = "file") MultipartFile file){
-        return this.amazonClient.uploadFile(file);
+    public String uploadFile(@RequestParam(value = "folder", required = false) String folder, @RequestPart(value = "file") MultipartFile file) {
+        return this.amazonClient.uploadFile(folder, file);
     }
 }

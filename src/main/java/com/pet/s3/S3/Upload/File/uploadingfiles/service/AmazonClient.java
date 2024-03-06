@@ -8,6 +8,7 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.*;
+import com.amazonaws.util.StringUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -53,12 +54,9 @@ public class AmazonClient {
                 .build();
     }
 
-    public String uploadFile(MultipartFile multipartFile)
-             {
+    public String uploadFile(String folder, MultipartFile multipartFile) {
         File file = convertMultipartToFile(multipartFile);
-        String fileName = generateFileName(multipartFile);
-//        String fileUrl = endpointUrl.replace("$1", bucketName).replace("$2", region) + "/" + fileName;
-//        log.info("Uploading file to AWS S3: " + fileUrl);
+        String fileName = ( StringUtils.isNullOrEmpty(folder) ? "" : (folder + "/") )+ generateFileName(multipartFile);
         return uploadFileToS3Bucket(bucketName, fileName, file);
     }
 
@@ -70,7 +68,7 @@ public class AmazonClient {
     }
 
     @SneakyThrows
-    private File convertMultipartToFile(MultipartFile file)  {
+    private File convertMultipartToFile(MultipartFile file) {
         File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         FileOutputStream fos = new FileOutputStream(convertedFile);
         fos.write(file.getBytes());

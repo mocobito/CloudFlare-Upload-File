@@ -1,8 +1,8 @@
 amazonProperties:
-  accessKey: 894004c55b91a3e2281d3732e8c125d4b1
-  secretKey: 023bc3e180b3a17d3f511268d277770f3ab2c2129ad272687c6cb1d8ce8798afee
-  endpointUrl : https://ec0b88e591da9d8ab7d05c20afef02f204.r2.cloudflarestorage.com
+  accessKey: 894004c55b91a3e228d3732e8c15d4b1
+  secretKey: 023bc3e180b3a17d3f51268d277770f3ab2c2129ad27687c6cb1d8ce8798afee
+  endpointUrl : https://ec0b88e59da9d8ab7d05c20afef02f04.r2.cloudflarestorage.com
   bucketName : cho-mua-sam
   region : ap-southeast-1
   signingRegion : apac
-  publicUrl : https://pub-9bc9a911bfb0645f5a067b58f4eeaa46a.r2.dev/
+  publicUrl : https://pub-9bc9a91bfb0645f5a067b58f4eeaa46a.r2.dev/
