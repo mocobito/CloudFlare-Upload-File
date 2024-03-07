@@ -1,4 +1,5 @@
 amazonProperties:
+  enabled : false
   accessKey: 894004c55b91a3e228d3732e8c15d4b1
   secretKey: 023bc3e180b3a17d3f51268d277770f3ab2c2129ad27687c6cb1d8ce8798afee
   endpointUrl : https://ec0b88e59da9d8ab7d05c20afef02f04.r2.cloudflarestorage.com

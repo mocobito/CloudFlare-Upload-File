@@ -43,15 +43,22 @@ public class AmazonClient {
     @Value("${amazonProperties.publicUrl}")
     private String publicUrl;
 
+    @Value("${amazonProperties.enabled}")
+    private boolean enabled;
     @PostConstruct
     private void initializeAmazon() {
-        log.info("---------------------------------");
-        log.info("Initializing Connect CloudFlare bucket name: " + bucketName);
-        log.info("---------------------------------");
-        AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
-        this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withEndpointConfiguration(
-                        new AwsClientBuilder.EndpointConfiguration(endpointUrl, signingRegion))
-                .build();
+        if (enabled) {
+            log.info("---------------------------------");
+            log.info("Initializing Connect CloudFlare bucket name: " + bucketName);
+            log.info("---------------------------------");
+            AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
+            this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withEndpointConfiguration(
+                    new AwsClientBuilder.EndpointConfiguration(endpointUrl, signingRegion)).build();
+        }else{
+            log.info("---------------------------------");
+            log.info("Initializing Connect CloudFlare bucket : " + bucketName + " disabled");
+            log.info("---------------------------------");
+        }
     }
 
     public String uploadFile(String folder, MultipartFile multipartFile) {
@@ -61,10 +68,20 @@ public class AmazonClient {
     }
 
     private String uploadFileToS3Bucket(String bucketName, String fileName, File file) {
-        s3Client.putObject(
-                new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead));
-        log.info("Public Url image to S3: " + publicUrl + fileName);
-        return publicUrl + fileName;
+        try {
+            if (enabled) {
+                s3Client.putObject(
+                        new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead));
+                log.info("Public Url image to S3: " + publicUrl + fileName);
+                return publicUrl + fileName;
+            } else {
+                log.debug("Public Url image to S3: " + publicUrl + fileName);
+                return "";
+            }
+        } catch (Exception e) {
+            log.debug("Public Url image to S3: " + publicUrl + fileName);
+            return "";
+        }
     }
 
     @SneakyThrows
